@@ -2,68 +2,78 @@
  * @name Login
  * @desc Displays login screen
  */
+import React, { useState } from 'react';
+import { Switch, Route, Link, useHistory } from 'react-router-dom';
+import { render } from 'react-dom';
+import axios from 'axios';
 
-import React, { Component } from 'react';
-
-export default class Login extends Component {
-  constructor() {
-    super();
-
-    // Initial state (empty strings) for the form's input fields.
-    this.state = {
+function Login(props) {
+ const history = useHistory();
+ const [state, setState] = useState({
       username: '',
       password: '',
-      match: false
-    };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
+      authorized: false
+ });
 
   // OnChange event handler that will update state whenever a key is pressed in an input field.
-  onChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  }
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-  //OnSubmit event handler on the form that will do a POST request to MongoDB with the current state as the request body.
-  async onSubmit(e) {
+
+  const onSubmit = (e) => {
     e.preventDefault();
-    const newLogin = { username, password } = this.state;
-    //const history = this.props;
-
-    try {
-
-      //query database to find if user exists
-      //if so, does username match password?
-      //if so, redirect
-      //if not, reload this page
-      await axios.get('/api/newLogin', body, {
+    if (state.username.length && state.password.length) {
+      const userData = {
+        "username": state.username,
+        "password": state.password
+      };
+ 
+      axios.post('/user/verify', userData, { //do we need the /api???
         headers: { 'content-type': 'application/json' },
-      });
-      await this.setState({
-        username: '',
-        password: ''
-      });
+      }).then((res) => {
 
-    } catch (err) {
-      console.log(err);
-    }
-  }
+        // backend: received username and pw
+// if not exist, error code
+// authorized true or false
+// if res.body.auth , set state
 
-  render() {
+        if (res.status === 200) {
+          setState((prevState) => ({
+            ...prevState,
+            Authentication: 'true',
+          }));
+
+//need sesssionStorage stuff here...
+          //sessionStorage.setItem('loggedInUser', state.username.toLowerCase());
+          redirectToTicketForm();
+        }
+      });
+    } else {
+        console.log('err');
+      }
+  };
+
+  const redirectToTicketForm = () => {
+    history.push('/ticketform')
+  };
+  
     return (
       <div className="row justify-content-center mt-5">
         <div className="col-6">
-          <form onSubmit={this.onSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
+          <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
             <label>
               USERNAME:
               <input
                 className="form-control"
-                onChange={this.onChange}
+                onChange={onChange}
                 type="text"
                 name="username"
-                value={this.state.username}
+                value={state.username}
                 required
               />
             </label>
@@ -72,10 +82,10 @@ export default class Login extends Component {
               <input
                 className="form-control"
                 style={{ width: '100%' }}
-                onChange={this.onChange}
+                onChange={onChange}
                 type="password"
                 name="password"
-                value={this.state.password}
+                value={state.password}
                 required
               />
             </label>
@@ -86,7 +96,7 @@ export default class Login extends Component {
               <br/>
               <p style={{textAlign: 'center'}}>OR</p>
 
-            <button className="btn btn-success" type="submit">
+            <button className="btn btn-success" type="button">
             CREATE ACCOUNT
           </button>
           </form>
@@ -94,4 +104,6 @@ export default class Login extends Component {
       </div>
     );
   }
-}
+
+
+export default Login;
