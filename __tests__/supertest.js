@@ -1,9 +1,25 @@
+const mongoose = require('mongoose');
 const request = require('supertest');
 const server = 'http://localhost:3000';
 
 //testing for user creation, that data reaches database
     //create 'GET' request to verify existing data in database
    describe('User route', () => {
+        
+    beforeAll((done) => {
+        const MONGO_URI = 'mongodb+srv://C_J_S:cEXzKdZwci44JkTU@cluster0.xxyaq.mongodb.net/Cluster0?retryWrites=true&w=majority';
+        mongoose.connect (MONGO_URI , {
+        useNewUrlParser : true, 
+        useUnifiedTopology: true, 
+        dbName: 'HelpDesk'
+        }).then(response =>{
+        console.log('Successfully connected to Mongo DB')
+        }).catch(error => console.log(error));
+        done()
+        }   
+    )
+
+
     describe('/user', () => {
         describe('GET', () => {
             it('responds with 200 status and application/json content type', () => {
