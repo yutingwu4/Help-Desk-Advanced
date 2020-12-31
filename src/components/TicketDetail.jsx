@@ -5,11 +5,11 @@
 
 import React from 'react';
 
-export default function TicketDetail({ loggedIn, ticket, updateTicketStatus }) {
+export default function TicketDetail({ authorized, ticket, updateTicketStatus }) {
   return (
     <div className="ticketDetail">
       <p>
-        <span className="detailLabel">Student: </span> {ticket.student}
+        <span className="detailLabel">Student: </span> {authorized}
       </p>
       <p>
         <span className="detailLabel">Problem: </span>

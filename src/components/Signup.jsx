@@ -49,8 +49,8 @@ function Signup(props) {
       }).then((res) => {
         if (res.status === 200) {
           setState((prevState) => ({
-            ...prevState,
-            Authentication: 'true',
+            ...prevState
+          
             // authorized: res.authorized
           }));
           //if res.body includes authorized: true, update state by calling function passed down as prop

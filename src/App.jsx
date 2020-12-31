@@ -14,13 +14,14 @@ import Signup from './components/Signup';
  */
 
 function App() {
-  const [banana, setBanana] = useState({
-    loggedIn : 'test',
-    authorized: false
-  });
+  const [authorized, setAuthorization] = useState('false'); //this needs to be a boolean eventually
 
 //function here to update state, passed down as a prop to signup
 //that function called in signup will update state and itself be passed down as a prop to ticket detail
+
+const authorizer = () => {
+  setAuthorization('true');
+}
 
 //update state with authorized boolean from user body
   return (
@@ -50,9 +51,9 @@ function App() {
           <Switch>
             <Route exact path="/" component={Login}
              />
-            <Route path="/viewtickets"><ViewTickets banana={banana.loggedIn}/></Route> 
+            <Route path="/viewtickets"><ViewTickets authorized={authorized}/></Route> 
             <Route path="/ticketForm" component={TicketForm} /> 
-            <Route path="/signup" component={Signup} /> 
+            <Route path="/signup"><Signup authorizer={authorizer} /></Route> 
           </Switch>
         </div>
       </Router>
