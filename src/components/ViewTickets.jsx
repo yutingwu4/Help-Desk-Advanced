@@ -54,7 +54,7 @@ export default class ViewTickets extends Component {
     // Conditional logic to display the active ticket if the current state is not null.
     const display =
       this.state.activeTicket === null ? null : (
-        <TicketDetail loggedIn={this.props.banana} ticket={this.state.activeTicket} updateTicketStatus={this.updateTicketStatus} />
+        <TicketDetail authorized={this.props.authorized} ticket={this.state.activeTicket} updateTicketStatus={this.updateTicketStatus} />
       );
 
     return (

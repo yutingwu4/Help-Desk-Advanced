@@ -23,6 +23,7 @@ exports.createUser = (req, res, next) => {
             console.log('Error creating new user:', err);
             return res.status(400).json(err);
           }
+          //console.log(result);
           res.locals.user = result;
           return next();
         });
@@ -44,8 +45,8 @@ exports.verifyUser = (req, res, next) => {
       //check if pswd user entered equals the bcrypt pswd in db
       bcrypt.compare(password, result.password, (err, response) => {
         if (response === true) {
-          const SSID = result._id;
-          res.cookie('SSID', SSID, { httpOnly: true, maxAge: 900000 })
+          // const SSID = result._id;
+          // res.cookie('SSID', SSID, { httpOnly: true, maxAge: 900000 })
           res.locals.user = result;
           return next();
         }

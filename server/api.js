@@ -21,5 +21,4 @@ router.post('/verify', verifyUser, (req, res) => { res.status(200).json(res.loca
 router.post('/create', createUser, (req, res) => { res.status(200).json(res.locals.user) });
 
 
-
 module.exports = router;
