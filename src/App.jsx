@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Ticket from './components/Ticket';
 import TicketForm from './components/TicketForm';
 import ViewTickets from './components/ViewTickets';
+import Login from './components/Login';
 
 /**
  * @terms
@@ -18,9 +19,13 @@ function App() {
       <Router>
         <div className="row ml-3">
           <ul className="list-inline">
-            <li className="customLink list-inline-item brand mr-3">HELPDESK</li>
-            <li className="list-inline-item mr-3">
               <Link className="customLink" to="/">
+                  <li className="customLink list-inline-item brand mr-3">
+                  HELPDESK
+                  </li>
+              </Link>
+            <li className="list-inline-item mr-3">
+              <Link className="customLink" to="/ticketForm">
                 NEW TICKET
               </Link>
             </li>
@@ -33,8 +38,11 @@ function App() {
         </div>
         <div className="container">
           <Switch>
-            <Route exact path="/" component={TicketForm} />
+            <Route exact path="/" component={Login}
+             />
             <Route path="/viewtickets" component={ViewTickets} />
+            <Route path="/ticketForm" component={TicketForm} /> 
+
           </Switch>
         </div>
       </Router>

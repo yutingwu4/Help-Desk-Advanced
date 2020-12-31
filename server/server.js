@@ -13,7 +13,7 @@ app.use(express.json());
 app.use('/api', apiRouter);
 
 //user endpoint will send any /user requests to the user router
-app.use('/user', userRouter);
+//app.use('/user', userRouter);
 
 //This "/" endpoint will render our client side html file
 app.get('/', (req, res) => {
@@ -24,8 +24,4 @@ app.use((req, res) => res.sendStatus(404));
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);
-});
-
-
-// const server = app.listen(PORT, () => console.log(`Listening at port ${PORT}`));
-// module.exports = server;
+})
