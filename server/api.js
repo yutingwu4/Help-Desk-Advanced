@@ -18,7 +18,7 @@ router.patch('/resolveTicket', verifyAuthorization, resolveTicket); //changes st
 //verify user
 router.post('/verify', verifyUser, (req, res) => { res.status(200).json(res.locals.user) })
 //create user
-router.post('/create', createUser, (req, res) => { res.status(200).json('User successfully created') });
+router.post('/create', createUser, (req, res) => { res.status(200).json(res.locals.user) });
 
 
 
