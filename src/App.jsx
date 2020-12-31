@@ -4,6 +4,7 @@ import Ticket from './components/Ticket';
 import TicketForm from './components/TicketForm';
 import ViewTickets from './components/ViewTickets';
 import Login from './components/Login';
+import Signup from './components/Signup';
 
 /**
  * @terms
@@ -13,6 +14,9 @@ import Login from './components/Login';
  */
 
 function App() {
+  // const [loggedIn, setLogin] = useState({
+  //   loggedIn : false
+  // })
   return (
     // React Router boilerplate code
     <div className="container-fluid">
@@ -21,7 +25,7 @@ function App() {
           <ul className="list-inline">
               <Link className="customLink" to="/">
                   <li className="customLink list-inline-item brand mr-3">
-                  HELPDESK
+                  HELPDESK 2.0
                   </li>
               </Link>
             <li className="list-inline-item mr-3">
@@ -42,7 +46,7 @@ function App() {
              />
             <Route path="/viewtickets" component={ViewTickets} />
             <Route path="/ticketForm" component={TicketForm} /> 
-
+            <Route path="/signup" component={Signup} /> 
           </Switch>
         </div>
       </Router>

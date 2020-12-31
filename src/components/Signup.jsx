@@ -8,11 +8,12 @@ import { Switch, Route, Link, useHistory } from 'react-router-dom';
 import { render } from 'react-dom';
 import axios from 'axios';
 
-function CreateUser(props) {
+function Signup(props) {
  const history = useHistory();
  const [state, setState] = useState({
       username: '',
       password: '',
+      authorized: false
  });
 
   // OnChange event handler that will update state whenever a key is pressed in an input field.
@@ -24,16 +25,24 @@ function CreateUser(props) {
     }));
   };
 
+  const onClick = (e) => {
+    setState((prevState) => ({
+      ...prevState,
+      authorized: !prevState.authorized
+    }))
+  }
+
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (state.username.length && state.password.length) {
       const userData = {
         "username": state.username,
-        "password": state.password
+        "password": state.password,
+        "authorized": state.authorized
       };
- 
-      axios.post('/api/create', userData, { //do we need the /api???
+      
+      axios.post('/api/create', userData, { 
         headers: { 'content-type': 'application/json' },
       }).then((res) => {
         if (res.status === 200) {
@@ -83,14 +92,19 @@ function CreateUser(props) {
                 required
               />
             </label>
-            <br/>
-            <button className="btn btn-success" type="submit">
-              LOGIN
-            </button>
-              <br/>
-              <p style={{textAlign: 'center'}}>OR</p>
+            
+            <label>
+              FELLOW?:
+              <input
+                className="form-control"
+                style={{ width: '100%' }}
+                onClick={onClick}
+                type="checkbox"
+                name="authorized"
+              />
+            </label>
 
-            <button className="btn btn-success" type="button">
+            <button className="btn" type="submit">
             CREATE ACCOUNT
           </button>
           </form>
@@ -100,4 +114,4 @@ function CreateUser(props) {
   }
 
 
-export default CreateUser;
+export default Signup;
