@@ -4,29 +4,30 @@ const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
 //creating new user accounts
-exports.createUser = async (req, res, next) => {
+exports.createUser = (req, res, next) => {
   const { username, password, authorized } = req.body;
   let hashedPassword;
 
   //use bcrypt to make password strong
-  await bcrypt.hash(password, saltRounds, (err, hash) => {
-    hashedPassword = hash;
-  })
-  console.log('pswd: ', password)
-  User.create(
-    {
-      username: username,
-      password: hashedPassword, //bcrypted pswd
-      authorized: authorized
-    },
-    (err, result) => {
-      if (err) {
-        console.log('Error creating new user:', err);
-        return res.status(400).json(err);
-      }
-      return next();
+  bcrypt.hash(password, saltRounds, (err, hash) => {
+    if (err) return next(err);
+    else {
+      User.create(
+        {
+          username: username,
+          password: hash, //bcrypted pswd
+          authorized: authorized
+        },
+        (err, result) => {
+          if (err) {
+            console.log('Error creating new user:', err);
+            return res.status(400).json(err);
+          }
+          return next();
+        });
     }
-  );
+  })
+
 };
 
 //verifying login with user and password

@@ -4,8 +4,6 @@ const { setTicket, getTickets, resolveTicket } = require('./controller');
 
 const { createUser, verifyUser } = require('./userController');
 
-const userRouter = require('./userRouter.js');
-
 const router = express.Router();
 
 
