@@ -87,15 +87,17 @@ function Login(props) {
             />
           </label>
           <br />
-          <button className="btn btn-success" type="submit">
+          
+          <button className="btn" type="submit">
             LOGIN
             </button>
           <br />
           <p style={{ textAlign: 'center' }}>OR</p>
-
-          <button className="btn btn-success" type="button">
-            CREATE ACCOUNT
-          </button>
+          <Link className="btn" to="/signup">   
+            <button className="btn create" type="button">
+              CREATE ACCOUNT
+            </button>
+          </Link>
         </form>
       </div>
     </div>
