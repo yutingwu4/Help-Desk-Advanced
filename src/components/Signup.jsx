@@ -33,7 +33,7 @@ function CreateUser(props) {
         "password": state.password
       };
  
-      axios.post('/user/create', userData, { //do we need the /api???
+      axios.post('/api/create', userData, { //do we need the /api???
         headers: { 'content-type': 'application/json' },
       }).then((res) => {
         if (res.status === 200) {
