@@ -5,8 +5,10 @@
 
 import React from 'react';
 
-export default function TicketDetail({ ticket, updateTicketStatus }) {
-  return (
+export default function TicketDetail({ authorized, ticket, updateTicketStatus }) {
+  //if authorized: true, then return: 
+
+  const notAuth =
     <div className="ticketDetail">
       <p>
         <span className="detailLabel">Student: </span> {ticket.student}
@@ -30,9 +32,41 @@ export default function TicketDetail({ ticket, updateTicketStatus }) {
 
         <a href="#">{ticket.zoom}</a>
       </p>
+    </div>;
+
+  const auth =
+    <div className="ticketDetailAuth">
+      <form>
+        <div class="form-group">
+          <span className="detailLabel">SUBMIT:</span>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+      </form >
+
       <button className="resolveBtn" onClick={() => updateTicketStatus(ticket)}>
-        Resolve
+        RESOLVE
       </button>
-    </div>
-  );
+
+    </div >;
+
+  if (authorized) {
+    return (
+      <div className='ticketContainer'>
+        <div>
+          {notAuth}
+          <br />
+          {auth}
+        </div>
+      </div >
+    );
+  }
+  else {
+    return (
+      <div className='ticketContainer'>
+        {notAuth}
+      </div>
+    )
+  }
 }
+
+//if authorized: true, display resolve button, otherwise don't

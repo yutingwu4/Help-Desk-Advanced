@@ -40,6 +40,7 @@ body {
 }
 .btn {
   background-color: $base-color !important;
+  color: white !important;
 }
 
 textarea,
@@ -68,7 +69,27 @@ input {
   height: 100%;
 }
 
-.ticketDetail {
+// .ticketDetail {
+//   margin-top: 4.5rem;
+//   max-width: 35%;
+//   border: 1px solid white;
+//   border-radius: 4px;
+//   padding: 2rem;
+//   position: fixed;
+//   font-family: JetBrains Mono;
+// }
+// .ticketDetailAuth {
+//   margin-top: 4.5rem;
+//   max-width: 35%;
+//   border: 1px solid white;
+//   border-radius: 4px;
+//   padding: 2rem;
+//   position: fixed;
+//   font-family: JetBrains Mono;
+// }
+.ticketContainer{
+  display: flex;
+  flex-direction: column;
   margin-top: 4.5rem;
   max-width: 35%;
   border: 1px solid white;

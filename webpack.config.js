@@ -9,6 +9,8 @@ module.exports = {
   },
   mode: process.env.NODE_ENV,
   devServer: {
+    host: 'localhost',
+    port: 8080,
     publicPath: '/',
     proxy: {
       '/api/**': 'http://localhost:3000',
