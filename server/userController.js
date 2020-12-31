@@ -30,9 +30,7 @@ exports.createUser = (req, res, next) => {
 
 };
 
-//verifying login with user and password
-//user/:username/:password
-//user/lex/password
+
 exports.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
   User.findOne({ username: username }, (err, result) => { //just search username
@@ -40,19 +38,26 @@ exports.verifyUser = (req, res, next) => {
       console.log(err);
       return next(err);
     }
-    if (!result) return res.status(400).send('Username or password incorrect.');
+    if (!result) return res.status(400).send('Username incorrect.');
     else {
       //check if pswd user entered equals the bcrypt pswd in db
-      res.locals.user = result;
-      return next();
+      bcrypt.compare(password, result.password, (err, response) => {
+        if (response === true) {
+          res.locals.user = result;
+          return next();
+        }
+        else return res.status(400).send('Password incorrect.');
+
+      })
+
     }
-  })
+  });
 };
 
 //verifying authorization level of user (resident vs fellow)
 exports.verifyAuthorization = (req, res, next) => {
-  const { username, password } = req.params;
-  User.findOne({ username: username, password: password }, (err, result) => {
+  const { username } = req.params;
+  User.findOne({ username: username }, (err, result) => {
     if (err) {
       return res.status(400).send(err)
     }
@@ -63,4 +68,3 @@ exports.verifyAuthorization = (req, res, next) => {
   })
 }
 
-//deleting user from DB
