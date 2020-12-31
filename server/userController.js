@@ -23,7 +23,7 @@ exports.createUser = (req, res, next) => {
             console.log('Error creating new user:', err);
             return res.status(400).json(err);
           }
-          console.log(result);
+          res.locals.user = result;
           return next();
         });
     }

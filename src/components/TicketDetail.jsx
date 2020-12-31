@@ -33,7 +33,7 @@ export default function TicketDetail({ loggedIn, ticket, updateTicketStatus }) {
 
       <form>
         <div class="form-group">
-          <label for="text area">Submit notes</label>
+          <span className="detailLabel">Fellow to submit notes:</span>
           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
       </form>
