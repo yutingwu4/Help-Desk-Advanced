@@ -49,8 +49,7 @@ const authorizer = () => {
         </div>
         <div className="container">
           <Switch>
-            <Route exact path="/" component={Login}
-             />
+            <Route exact path="/"><Login authorizer={authorizer}/></Route>
             <Route path="/viewtickets"><ViewTickets authorized={authorized}/></Route> 
             <Route path="/ticketForm" component={TicketForm} /> 
             <Route path="/signup"><Signup authorizer={authorizer} /></Route> 

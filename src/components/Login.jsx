@@ -40,11 +40,11 @@ function Login(props) {
 
         console.log('hi')
         if (res.status === 200) {
-          setState((prevState) => ({
-            ...prevState,
-            Authentication: 'true',
-          }));
-
+          // setState((prevState) => ({
+          //   ...prevState,
+          //   Authentication: 'true',
+          // }));
+          if (res.authorized) props.authorizer()
           //need sesssionStorage stuff here...
           //sessionStorage.setItem('loggedInUser', state.username.toLowerCase());
           redirectToTicketForm();

@@ -48,13 +48,14 @@ function Signup(props) {
         headers: { 'content-type': 'application/json' },
       }).then((res) => {
         if (res.status === 200) {
-          setState((prevState) => ({
-            ...prevState
+          // setState((prevState) => ({
+            // ...prevState
           
             // authorized: res.authorized
-          }));
+          // }));
           //if res.body includes authorized: true, update state by calling function passed down as prop
           //from App.jsx
+          if (res.authorized) props.authorizer()
           
           //need sesssionStorage stuff here...
           //sessionStorage.setItem('loggedInUser', state.username.toLowerCase());
