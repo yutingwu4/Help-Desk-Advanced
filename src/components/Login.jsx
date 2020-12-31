@@ -26,15 +26,15 @@ function Login(props) {
 
 
   const onSubmit = (e) => {
-  
-   e.preventDefault(e);
+
+    e.preventDefault();
     if (state.username.length && state.password.length) {
       const userData = {
         "username": state.username,
         "password": state.password
       };
-      
-      axios.post('/api/verify', userData, { 
+
+      axios.post('/api/verify', userData, {
         headers: { 'content-type': 'application/json' },
       }).then((res) => {
 

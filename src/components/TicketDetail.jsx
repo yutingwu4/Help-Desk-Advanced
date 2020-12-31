@@ -30,10 +30,18 @@ export default function TicketDetail({ authorized, ticket, updateTicketStatus })
 
         <a href="#">{ticket.zoom}</a>
       </p>
-      
+
+      <form>
+        <div class="form-group">
+          <label for="text area">Submit notes</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+      </form>
+
       <button className="resolveBtn" onClick={() => updateTicketStatus(ticket)}>
         Resolve
       </button>
+
     </div>
   );
 }

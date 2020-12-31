@@ -3,7 +3,6 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 const apiRouter = require('./api.js');
-const userRouter = require('./userRouter.js');
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -22,8 +21,6 @@ app.get('/', (req, res) => {
 //catch-all route handler--for unknown routes
 app.use((req, res) => res.sendStatus(404));
 
-const server = app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);
-});
-
-module.exports = server;
+})

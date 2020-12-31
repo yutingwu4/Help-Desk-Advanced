@@ -37,14 +37,20 @@ exports.getTickets = (req, res) => {
 };
 
 exports.resolveTicket = (req, res) => {
-  //resolveTicket needs: ticket ID and status
-  const { id, status } = req.body;
-  TicketForm.findOneAndUpdate({ _id: id }, { status }, { new: true, useFindAndModify: false }, (err, result) => {
-    if (!result) {
-      console.log('Could not update the Ticket ', err);
-      return res.status(500).send(err);
-    }
-    //the result should be the updated version of the ticket you updated
-    return res.status(200).send(`Ticket has been resolved. Ticket Info: ${result}`);
-  });
+  //resolveTicket needs: ticket ID and status, username, resolvedNotes
+  if (res.locals.authorized !== true) return res.status(400).send('The user is not authorized to perform this action');
+  else {
+    const { id, status, resolvedNotes } = req.body;
+    TicketForm.findOneAndUpdate({ _id: id }, { status, resolvedNotes }, { new: true, useFindAndModify: false }, (err, result) => {
+      if (err) return (next(err));
+
+      if (!result) {
+        console.log('Could not update the Ticket ', err);
+        return res.status(500).send(err);
+      }
+      //the result should be the updated version of the ticket you are resolving
+      return res.status(200).send(`Ticket has been resolved. Ticket Info: ${result}`);
+    });
+
+  }
 };
