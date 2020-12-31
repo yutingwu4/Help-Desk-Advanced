@@ -10,8 +10,8 @@ import TicketDetail from './TicketDetail';
 import axios from 'axios';
 
 export default class ViewTickets extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       tickets: [],
       activeTicket: null,
@@ -54,7 +54,7 @@ export default class ViewTickets extends Component {
     // Conditional logic to display the active ticket if the current state is not null.
     const display =
       this.state.activeTicket === null ? null : (
-        <TicketDetail ticket={this.state.activeTicket} updateTicketStatus={this.updateTicketStatus} />
+        <TicketDetail loggedIn={this.props.banana} ticket={this.state.activeTicket} updateTicketStatus={this.updateTicketStatus} />
       );
 
     return (

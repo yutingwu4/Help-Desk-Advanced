@@ -5,7 +5,7 @@
 
 import React from 'react';
 
-export default function TicketDetail({ ticket, updateTicketStatus }) {
+export default function TicketDetail({ loggedIn, ticket, updateTicketStatus }) {
   return (
     <div className="ticketDetail">
       <p>
@@ -30,9 +30,12 @@ export default function TicketDetail({ ticket, updateTicketStatus }) {
 
         <a href="#">{ticket.zoom}</a>
       </p>
+      
       <button className="resolveBtn" onClick={() => updateTicketStatus(ticket)}>
         Resolve
       </button>
     </div>
   );
 }
+
+//if authorized: true, display resolve button, otherwise don't

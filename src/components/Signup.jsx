@@ -16,6 +16,8 @@ function Signup(props) {
       authorized: false
  });
 
+ //if state.authorized => update state in App.jsx
+
   // OnChange event handler that will update state whenever a key is pressed in an input field.
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -49,9 +51,12 @@ function Signup(props) {
           setState((prevState) => ({
             ...prevState,
             Authentication: 'true',
+            // authorized: res.authorized
           }));
- 
-//need sesssionStorage stuff here...
+          //if res.body includes authorized: true, update state by calling function passed down as prop
+          //from App.jsx
+          
+          //need sesssionStorage stuff here...
           //sessionStorage.setItem('loggedInUser', state.username.toLowerCase());
           redirectToTicketForm();
         }
