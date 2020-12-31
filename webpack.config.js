@@ -9,6 +9,8 @@ module.exports = {
   },
   mode: process.env.NODE_ENV,
   devServer: {
+    host: 'localhost',
+    port: 8080,
     publicPath: '/',
     proxy: {
       '/api/**': 'http://localhost:3000',
@@ -23,7 +25,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: ['@babel/plugin-transform-runtime'],
+            plugins: ['@babel/plugin-transform-runtime', '@babel/transform-async-to-generator'],
           },
         },
       },
