@@ -38,6 +38,7 @@ exports.getTickets = (req, res) => {
 
 exports.resolveTicket = (req, res) => {
   //resolveTicket needs: ticket ID and status
+  //if (res.locals.authorized === true)
   const { id, status } = req.body;
   TicketForm.findOneAndUpdate({ _id: id }, { status }, { new: true, useFindAndModify: false }, (err, result) => {
     if (!result) {
