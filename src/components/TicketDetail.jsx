@@ -6,10 +6,12 @@
 import React from 'react';
 
 export default function TicketDetail({ authorized, ticket, updateTicketStatus }) {
-  return (
+  //if authorized: true, then return: 
+
+  const notAuth =
     <div className="ticketDetail">
       <p>
-        <span className="detailLabel">Student: </span> {authorized}
+        <span className="detailLabel">Student: </span> {JSON.stringify(authorized)}
       </p>
       <p>
         <span className="detailLabel">Problem: </span>
@@ -30,20 +32,41 @@ export default function TicketDetail({ authorized, ticket, updateTicketStatus })
 
         <a href="#">{ticket.zoom}</a>
       </p>
+    </div>;
 
+  const auth =
+    <div className="ticketDetail">
       <form>
         <div class="form-group">
-          <label for="text area">Submit notes</label>
+          <span className="detailLabel">SUBMIT:</span>
           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
-      </form>
+      </form >
 
       <button className="resolveBtn" onClick={() => updateTicketStatus(ticket)}>
-        Resolve
+        RESOLVE
       </button>
 
-    </div>
-  );
+    </div >;
+
+  if (authorized) {
+    return (
+      <div>
+        <div>
+          {notAuth}
+          <br />
+          {auth}
+        </div>
+      </div >
+    );
+  }
+  else {
+    return (
+      <div>
+        {notAuth}
+      </div>
+    )
+  }
 }
 
 //if authorized: true, display resolve button, otherwise don't

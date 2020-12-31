@@ -14,27 +14,27 @@ import Signup from './components/Signup';
  */
 
 function App() {
-  const [authorized, setAuthorization] = useState('false'); //this needs to be a boolean eventually
+  const [authorized, setAuthorization] = useState(false); //this needs to be a boolean eventually
 
-//function here to update state, passed down as a prop to signup
-//that function called in signup will update state and itself be passed down as a prop to ticket detail
+  //function here to update state, passed down as a prop to signup
+  //that function called in signup will update state and itself be passed down as a prop to ticket detail
 
-const authorizer = () => {
-  setAuthorization('true');
-}
+  const authorizer = () => {
+    setAuthorization(true);
+  }
 
-//update state with authorized boolean from user body
+  //update state with authorized boolean from user body
   return (
     // React Router boilerplate code
     <div className="container-fluid">
       <Router>
         <div className="row ml-3">
           <ul className="list-inline">
-              <Link className="customLink" to="/">
-                  <li className="customLink list-inline-item brand mr-3">
-                  HELPDESK 2.0
+            <Link className="customLink" to="/">
+              <li className="customLink list-inline-item brand mr-3">
+                HELPDESK 2.0
                   </li>
-              </Link>
+            </Link>
             <li className="list-inline-item mr-3">
               <Link className="customLink" to="/ticketForm">
                 NEW TICKET
@@ -49,10 +49,10 @@ const authorizer = () => {
         </div>
         <div className="container">
           <Switch>
-            <Route exact path="/"><Login authorizer={authorizer}/></Route>
-            <Route path="/viewtickets"><ViewTickets authorized={authorized}/></Route> 
-            <Route path="/ticketForm" component={TicketForm} /> 
-            <Route path="/signup"><Signup authorizer={authorizer} /></Route> 
+            <Route exact path="/"><Login authorizer={authorizer} /></Route>
+            <Route path="/viewtickets"><ViewTickets authorized={authorized} /></Route>
+            <Route path="/ticketForm" component={TicketForm} />
+            <Route path="/signup"><Signup authorizer={authorizer} /></Route>
           </Switch>
         </div>
       </Router>

@@ -38,15 +38,15 @@ function Login(props) {
         headers: { 'content-type': 'application/json' },
       }).then((res) => {
 
-        console.log('hi')
+        // console.log('hi')
         if (res.status === 200) {
-          // setState((prevState) => ({
-          //   ...prevState,
-          //   Authentication: 'true',
-          // }));
-          if (res.authorized) props.authorizer()
-          //need sesssionStorage stuff here...
-          //sessionStorage.setItem('loggedInUser', state.username.toLowerCase());
+
+          //if res.body.authorized, call authorizer()
+          //console.log(res) //should be the user object the server sends as a response to the request above
+          if (res.data.authorized === true) {
+            props.authorizer()
+          }
+
           redirectToTicketForm();
         }
       }).catch((err) => console.log(err, 'line 56'));
@@ -87,13 +87,13 @@ function Login(props) {
             />
           </label>
           <br />
-          
+
           <button className="btn" type="submit">
             LOGIN
             </button>
           <br />
           <p style={{ textAlign: 'center' }}>OR</p>
-          <Link className="btn" to="/signup">   
+          <Link className="btn" to="/signup">
             <button className="btn create" type="button">
               CREATE ACCOUNT
             </button>
