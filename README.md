@@ -48,3 +48,11 @@ Back-end technologies:
 
 1) Users to be able to star/favorite tickets they'd like to keep track of, so that if the same problem(s) occurs, they have a customized log of records to help themselves or others.
 2) Add search feature so that users can quickly find specific tickets with keywords or tickets of the same topic.
+
+
+## Contributors
+
+- Heidi Bang @heidibang
+- Lex Choi @lexiphur
+- Cole Styron @C-STYR
+- Julie Wu @yutingwu4
